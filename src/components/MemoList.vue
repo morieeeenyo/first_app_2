@@ -1,16 +1,30 @@
 <template>
   <div class="memo-list">
-    <button id="modal_button">モーダルを開く</button>
-
-
+    <button id="modal_button" v-on:click="show">モーダルを開く</button>
+    <modal name="hello-world" :draggable="true" :resizable="true">
+      <MemoForm @hide="this.hide"></MemoForm>
+    </modal>
   </div>
 </template>
 
 <script>
+import MemoForm from './MemoForm'
+
 export default {
   name: 'MemoList',
-  
+  components: {
+    MemoForm
+  },
+  methods: {
+    show : function() {
+      this.$modal.show('hello-world');
+    },
+    hide : function () {
+      this.$modal.hide('hello-world');
+    },
+  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
