@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
       <p>ほれ、フォームやぞ</p>
-      <form @submit="handleSubmit" class="modal-form">
+      <form @submit.prevent="handleSubmit" class="modal-form">
         <input type="text" name="content" id="content" v-model="post.content"  />
         <input type="button" value="送信" @click="handleSubmit" />
       </form>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import {postRequest} from '../requests/postRequest'
 export default {
   data: function () {
     return {
@@ -27,9 +28,14 @@ export default {
     hide: function () {
       this.$emit("hide");
     },
-    handleSubmit: function (e) {
+    handleSubmit: async function (e) {
       e.preventDefault()
-      console.log(this.post.content)
+      const response = await postRequest('create', {
+        content: this.post.content
+      })
+      if (response.status === 200) {
+        this.$emit("hide");
+      }
     }
   },
 };

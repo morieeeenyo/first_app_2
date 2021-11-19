@@ -1,6 +1,6 @@
-import api from './config/axiosConfig'
+import {api} from './config/axiosConfig'
 
-export const postRequst = async (type, parameter) => {
+export const postRequest = async (type, parameter) => {
   switch (type) {
     case 'index':
       return await api.get('/posts')

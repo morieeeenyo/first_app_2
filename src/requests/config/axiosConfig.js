@@ -1,7 +1,12 @@
-import axios from 'axios'
+import axiosBase from 'axios'
 
-export const api = axios.create({
-  baseURL: 'http://localhost:3001'
+export const api = axiosBase.create({
+  baseURL: 'http://localhost:3001/api',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+  responseType: 'json'
 })
 
 api.interceptors.request.use(function (request) {
