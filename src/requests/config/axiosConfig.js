@@ -24,6 +24,8 @@ api.interceptors.response.use(function (response) {
      // HTTPステータスに応じて処理
      break
      case 403:
+     case 422:
+       throw error
      default:
      // 例外処理  
   }
