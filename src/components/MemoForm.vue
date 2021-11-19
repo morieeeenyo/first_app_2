@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
       <p>ほれ、フォームやぞ</p>
-      <ul v-for="error in errors" :key="error">
+      <ul v-for="error in errors" :key="error" class="error-messages">
         <li>
           {{ error }}
         </li>
@@ -57,5 +57,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.error-messages {
+  list-style: none;
+  color: red;
+  padding: 0;
 }
 </style>
