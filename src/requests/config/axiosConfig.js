@@ -1,7 +1,7 @@
 import axiosBase from 'axios'
 
 export const api = axiosBase.create({
-  baseURL: 'http://localhost:3001/api',
+  baseURL: 'http://localhost:3000/api',
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
@@ -22,6 +22,7 @@ api.interceptors.response.use(function (response) {
   switch (error.response?.status) {
      case 401:
      // HTTPステータスに応じて処理
+    //  ログアウトする処理を入れる
      break
      case 403:
      case 422:

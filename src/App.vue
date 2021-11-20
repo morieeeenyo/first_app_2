@@ -10,7 +10,7 @@ import MemoList from './components/MemoList'
 export default {
   name: 'App',
   components: {
-    MemoList
+    MemoList,
   }
 }
 </script>
@@ -23,5 +23,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.test {
+  color: red;
 }
 </style>

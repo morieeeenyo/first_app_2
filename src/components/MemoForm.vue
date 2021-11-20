@@ -21,6 +21,7 @@
 
 <script>
 import {postRequest} from '../requests/postRequest'
+
 export default {
   data: function () {
     return {
@@ -34,8 +35,7 @@ export default {
     hide: function () {
       this.$emit("hide");
     },
-    handleSubmit: async function (e) {
-      e.preventDefault()
+    handleSubmit: async function () {
       try {
         const response = await postRequest('create', {
           content: this.post.content
@@ -49,6 +49,7 @@ export default {
       }
     }
   },
+  props: ['hoge']
 };
 </script>
 
