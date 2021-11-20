@@ -1,22 +1,25 @@
 <template>
+  <!-- htmlやで -->
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- 登録したコンポーネントはhtmlタグのように扱える -->
+    <MemoList></MemoList>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// javascriptです
+import MemoList from './components/MemoList' // コンポーネントを呼び出す場合はscriptタグ内でimportする
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MemoList, // コンポーネントを登録する
   }
 }
 </script>
 
 <style>
+/* cssはここ */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +27,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.test {
+  color: red;
 }
 </style>
