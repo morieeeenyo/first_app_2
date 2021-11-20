@@ -10,7 +10,9 @@
           {{ error }}
         </li>
       </ul>
+      <!-- submit.prevent→preventDefaultを自動で実行してくれる -->
       <form @submit.prevent="handleSubmit" class="modal-form">
+        <!-- v-modelを使うとdataとinputタグの入力値をリンクさせられる -->
         <input type="text" name="content" id="content" v-model="post.content"  />
         <input type="button" value="送信" @click="handleSubmit" />
       </form>
@@ -33,24 +35,26 @@ export default {
   },
   methods: {
     hide: function () {
-      this.$emit("hide");
+      this.$emit("hide"); // emitを使うと親コンポーネントで定義したイベントを呼び出せる
+      // MemoList.vueの6行目
+      // <MemoForm @hide="this.hide" @fetchPosts="this.fetchPosts"></MemoForm>
+      // 上記の@hideで定義した関数が呼ばれる
     },
     handleSubmit: async function () {
       try {
-        const response = await postRequest('create', {
+        const response = await postRequest('create', { // posts_controllerのcreateにリクエスト
           content: this.post.content
         })
         if (response.status === 200) {
-          this.$emit("fetchPosts");
+          this.$emit("fetchPosts"); // 親コンポーネントで定義したfetchPostsを呼ぶ。これで最新の一覧データを非同期で反映させられる
           this.$emit("hide");
         }
       } catch (e) {
         console.log(e.response)
-        this.errors = e.response.data.errors
+        this.errors = e.response.data.errors // バリデーションエラーが出た場合はstateに格納してエラーメッセージを表示(8-12行目)
       }
     }
   },
-  props: ['hoge']
 };
 </script>
 

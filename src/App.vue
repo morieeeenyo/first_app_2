@@ -1,21 +1,25 @@
 <template>
+  <!-- htmlやで -->
   <div id="app">
+    <!-- 登録したコンポーネントはhtmlタグのように扱える -->
     <MemoList></MemoList>
   </div>
 </template>
 
 <script>
-import MemoList from './components/MemoList'
+// javascriptです
+import MemoList from './components/MemoList' // コンポーネントを呼び出す場合はscriptタグ内でimportする
 
 export default {
   name: 'App',
   components: {
-    MemoList,
+    MemoList, // コンポーネントを登録する
   }
 }
 </script>
 
 <style>
+/* cssはここ */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

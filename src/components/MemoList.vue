@@ -1,11 +1,15 @@
 <template>
   <div class="memo-list">
+    <!-- @click→クリックしたときにイベント発火。show、はscriptタグに定義されたshow関数 -->
     <button id="modal_button" @click="show">モーダルを開く</button>
-    <modal name="kurita" :draggable="true" :resizable="true">
-      <MemoForm @hide="this.hide" @fetchPosts="this.fetchPosts" :hoge='"test"'></MemoForm>
+    <modal name="kurita">
+      <MemoForm @hide="this.hide" @fetchPosts="this.fetchPosts"></MemoForm>
     </modal>
+    <!-- v-forでループ処理を実現。hoge in hogesの形で、hogeが一つ一つの要素。erbにeach文書くのと同じ -->
+    <!-- keyは何でもいいので設定する -->
     <ul v-for="post in posts" :key="post.id" class="error-messages">
       <li>
+        <!-- 波括弧2つ使うと変数の値を画面上に表示できる -->
         {{ post.content }}
       </li>
     </ul>
@@ -21,31 +25,31 @@ export default {
   components: {
     MemoForm
   },
+  // dataってところにstateが格納される。ReactでいうuseState的なやつ
   data: function() {
     return {
-      test: 'test',
       posts: []
     }
   },
   methods: {
     show : function() {
-      this.$modal.show('kurita');
+      this.$modal.show('kurita'); // name属性がkurita、になっているモーダルを開く(5行目のやつ)
     },
     hide : function () {
-      this.$modal.hide('kurita');
+      this.$modal.hide('kurita'); // name属性がkurita、になっているモーダルを閉じる(5行目のやつ)
     },
     fetchPosts: async function () {
         try {
-        const response = await postRequest('index')
+        const response = await postRequest('index') // posts_controllerのindexアクションと通信
         if (response.status === 200) {
-          this.posts = response.data.data
+          this.posts = response.data.data // statusが200だったらstateにレスポンスを格納する
         }
       } catch (e) {
         console.log(e.response)
-        // this.errors = ['hoge', 'fuga']
       }
     }
   },
+  // コンポーネント読み込み時に関数を実行
   mounted: async function () {
     this.fetchPosts()
   }
@@ -53,7 +57,6 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #modal_button {
   padding: 5px 20px ;

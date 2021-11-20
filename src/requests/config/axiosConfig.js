@@ -1,7 +1,8 @@
 import axiosBase from 'axios'
 
 export const api = axiosBase.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api', // railsサーバーのURLを入れる。本番環境にpushする場合はprocess.env.NODE_ENVの値によって分岐させる
+  // ↓この辺はなくてもいいかも
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
@@ -9,6 +10,8 @@ export const api = axiosBase.create({
   responseType: 'json'
 })
 
+// 以下はちょっと応用編。リクエストやレスポンスごとに共通の処理を入れたい場合に使う
+// 例えばエラーが出たときに共通で同じ画面に遷移させたい場合などに使える
 api.interceptors.request.use(function (request) {
   // 成功時の処理
   return request;

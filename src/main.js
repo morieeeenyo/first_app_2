@@ -8,3 +8,5 @@ Vue.use(VModal);
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
+// public/index.htmlの <div id="app"></div>以下にコンポーネントをマウントしていくぞ
