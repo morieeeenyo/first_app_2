@@ -2,7 +2,7 @@
   <div class="memo-list">
     <button id="modal_button" @click="show">モーダルを開く</button>
     <modal name="kurita" :draggable="true" :resizable="true">
-      <MemoForm @hide="this.hide" :hoge='"test"'></MemoForm>
+      <MemoForm @hide="this.hide" @fetchPosts="this.fetchPosts" :hoge='"test"'></MemoForm>
     </modal>
     <ul v-for="post in posts" :key="post.id" class="error-messages">
       <li>
@@ -34,17 +34,20 @@ export default {
     hide : function () {
       this.$modal.hide('kurita');
     },
+    fetchPosts: async function () {
+        try {
+        const response = await postRequest('index')
+        if (response.status === 200) {
+          this.posts = response.data.data
+        }
+      } catch (e) {
+        console.log(e.response)
+        // this.errors = ['hoge', 'fuga']
+      }
+    }
   },
   mounted: async function () {
-    try {
-      const response = await postRequest('index')
-      if (response.status === 200) {
-        this.posts = response.data.data
-      }
-    } catch (e) {
-      console.log(e.response)
-      // this.errors = ['hoge', 'fuga']
-    }
+    this.fetchPosts()
   }
 }
 

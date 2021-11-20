@@ -41,6 +41,7 @@ export default {
           content: this.post.content
         })
         if (response.status === 200) {
+          this.$emit("fetchPosts");
           this.$emit("hide");
         }
       } catch (e) {
